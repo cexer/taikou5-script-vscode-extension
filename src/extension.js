@@ -250,8 +250,11 @@ function activate(context) {
                 vscode.commands.executeCommand('setContext', 'taikou5.isEventFile', false);
                 return;
             }
-            const firstLine = editor.document.lineAt(0).text.trim();
-            const isEventFile = firstLine === '太閣立志傳５事件源文件';
+            const rawFirstLine = editor.document.lineAt(0).text;
+            const withoutBom = rawFirstLine.replace(/^\uFEFF/, '');
+            const commentIndex = withoutBom.indexOf('//');
+            const header = (commentIndex >= 0 ? withoutBom.slice(0, commentIndex) : withoutBom).trim();
+            const isEventFile = /^太[閣阁]立志[傳传][５5]事件源文件$/.test(header);
             vscode.commands.executeCommand('setContext', 'taikou5.isEventFile', isEventFile);
         };
 
