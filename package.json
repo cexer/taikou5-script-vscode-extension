@@ -1,0 +1,121 @@
+{
+  "name": "taikou5-script",
+  "displayName": "太阁立志传V 脚本",
+  "description": "太阁立志传V 脚本语法高亮与代码片段",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ztkhack/taikou5-script"
+  },
+  "version": "0.0.2",
+  "publisher": "ztkhack",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "main": "./src/extension.js",
+  "activationEvents": [
+    "onLanguage:taikou5-script",
+    "onView:taikou5-config-view",
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "taikou5-script",
+        "aliases": [
+          "Taikou V Script",
+          "tk5"
+        ],
+        "extensions": [
+          ".tk5",
+          ".txt"
+        ],
+        "firstLine": "^太閣立志傳５事件源文件$",
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "taikou5-script",
+        "scopeName": "source.taikou5",
+        "path": "./syntaxes/taikou5.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "taikou5-script",
+        "path": "./snippets/taikou5.json"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "太阁立志传V 脚本",
+      "properties": {
+        "taikou5.compilerPath": {
+          "type": "string",
+          "default": "",
+          "description": "tkhack-dx.exe 的路径（建议使用侧栏中的“设置编译器路径”按钮进行选择）",
+          "scope": "window"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "taikou5.compile",
+        "title": "编译为EVM",
+        "icon": "$(play)"
+      },
+      {
+        "command": "taikou5.openSettings",
+        "title": "设置编译器路径",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "taikou5.refreshConfig",
+        "title": "刷新",
+        "icon": "$(refresh)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "taikou5.refreshConfig",
+          "when": "view == taikou5-config-view",
+          "group": "navigation"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "taikou5.compile",
+          "when": "taikou5.isEventFile",
+          "group": "navigation"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "taikou5-sidebar",
+          "title": "太阁立志传V",
+          "icon": "images/katana.svg"
+        }
+      ]
+    },
+    "views": {
+      "taikou5-sidebar": [
+        {
+          "id": "taikou5-config-view",
+          "name": "配置"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "taikou5-config-view",
+        "content": "快速访问插件配置。\n[打开配置](command:taikou5.openSettings?%5B%5D)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Taikou Risshiden V Script",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#commands"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#values"
+    },
+    {
+      "include": "#variables"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.taikou5",
+          "match": "//.*$"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.taikou5",
+          "match": "\\b(分歧|循環|脫出模塊|場合別|場合分歧|ＡＮＤ調查|ＯＲ調查|條件模塊|功能|事件|局部定義|定義)\\b"
+        },
+        {
+          "name": "storage.type.taikou5",
+          "match": "\\b(信息|屬性|發生契機|發生條件|執行)\\b"
+        }
+      ]
+    },
+    "commands": {
+      "patterns": [
+        {
+          "name": "support.function.taikou5",
+          "match": "\\b(調查|代入[^:]*|更新|調用|文字列設定|對話|自語|旁白|變名對話|消息|選擇|列表框設定.*|列表框顯示|列表框設定列|列表框設定行|列表框設定格|容器設定|容器清理|容器排除|容器篩選|容器排序|容器選擇|容器存取|個人戰鬥|圖片表示|圖片顯示文件|圖片準備文件|圖片準備顏色|圖片顯示|圖片添加文字|圖片清理文字|圖片疊加圖片|圖片九宮拉伸|文字列計算高寬|圖片移動|圖片移除|圖片事件處理|圖片表示位置|ＳＥ開始|ＳＥ循環|ＳＥ停止|ＢＧＭ變更|日誌|離開設施|場面選擇添加|場面選擇清理|場面人物添加|場面人物移除|顯示設定|停止時間|關閉消息|背景變更|背景保持|背景恢復)(?=:)"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.taikou5",
+          "begin": "\\[\\[",
+          "end": "\\]\\]",
+          "patterns": [
+            {
+              "include": "#variables"
+            }
+          ]
+        }
+      ]
+    },
+    "values": {
+      "patterns": [
+        {
+          "name": "constant.numeric.taikou5",
+          "match": "\\(([0-9]+)\\)"
+        },
+        {
+          "name": "variable.parameter.taikou5",
+          "begin": "\\(",
+          "end": "\\)",
+          "patterns": [
+            {
+              "include": "#variables"
+            }
+          ]
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "name": "variable.other.taikou5",
+          "match": "<.*?>"
+        },
+        {
+          "name": "variable.other.placeholder.taikou5",
+          "match": "\\{.*?\\}"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.taikou5"
+}
