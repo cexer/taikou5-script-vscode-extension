@@ -221,8 +221,13 @@ function activate(context) {
                 label: '编译为EVM'
             };
 
-            const commandLine = `"${compilerPath}" --for=5dx --language=sc --command=compile --input="${editor.document.fileName}"`;
-            const execution = new vscode.ShellExecution('cmd.exe', ['/d', '/c', commandLine]);
+            const args = [
+                '--for=5dx',
+                '--language=sc',
+                '--command=compile',
+                `--input=${editor.document.fileName}`
+            ];
+            const execution = new vscode.ShellExecution(compilerPath, args);
 
             const task = new vscode.Task(
                 taskDefinition,
